@@ -104,8 +104,7 @@ color_list = color_list.astype('uint8').tolist()
 
 
 def vis_add_mask(image, mask, color, alpha):
-	height, width = input.shape[:2]
-	image = np.zeroes(height, width, 3)
+	image[:] = color_list[1]
 	mask = mask > 0.5
 	image[mask] = color_list[0]
 	return image.astype('uint8')
