@@ -107,7 +107,7 @@ def vis_add_mask(image, mask, color, alpha):
 	image2 = image.copy()
 	height, width = image2.shape[:2]
 	w, h = (16, 16)
-	# temp = cv2.resize(input, (w, h), interpolation=cv2.INTER_LINEAR)
+	temp = cv2.resize(input, (w, h), interpolation=cv2.INTER_LINEAR)
 	pixel_image = cv2.resize(temp, (width, height), interpolation=cv2.INTER_NEAREST)
 	color = np.array(color_list[color])
 	mask = mask > 0.5
