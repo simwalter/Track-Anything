@@ -105,7 +105,7 @@ color_list = color_list.astype('uint8').tolist()
 
 def vis_add_mask(image, mask, color, alpha):
 	image2 = image.copy()
-	print(type(image))
+	print(image.shape)
 	# height, width = image2.shape[:2]
 	# w, h = (16, 16)
 	# temp = cv2.resize(input, (w, h), interpolation=cv2.INTER_LINEAR)
