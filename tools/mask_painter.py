@@ -180,7 +180,7 @@ def mask_generator_11(mask, background_radius, contour_radius):
 	return background_mask, contour_mask
 
 
-def mask_painter(input_image, input_mask, background_alpha=0, background_blur_radius=7, contour_width=3, contour_color=0, contour_alpha=1, mode='11'):
+def mask_painter(input_image, input_mask, background_alpha=0.5, background_blur_radius=7, contour_width=3, contour_color=3, contour_alpha=1, mode='11'):
 	"""
 	Input:
 	input_image: numpy array
@@ -217,7 +217,7 @@ def mask_painter(input_image, input_mask, background_alpha=0, background_blur_ra
 
 	# paint
 	painted_image = vis_add_mask\
-		(input_image, background_mask, contour_mask, color_list[0], color_list[0], background_alpha, contour_alpha)	# black for background
+		(input_image, background_mask, contour_mask, color_list[0], color_list[contour_color], background_alpha, contour_alpha)	# black for background
 
 	return painted_image
 
