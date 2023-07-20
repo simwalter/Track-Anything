@@ -103,7 +103,7 @@ color_list = colormap()
 color_list = color_list.astype('uint8').tolist()
 
 
-def vis_add_mask(image, mask, color, alpha):
+def vis_add_mask(image, mask, color, alpha, mode=0):
 	mask = mask > 0.5
 	if mode:
 		image[:] = color_list[1]
