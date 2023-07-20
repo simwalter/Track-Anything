@@ -197,7 +197,7 @@ def add_multi_mask(video_state, interactive_state, mask_dropdown):
         interactive_state["multi_mask"]["masks"].append(mask)
         interactive_state["multi_mask"]["mask_names"].append("mask_{:03d}".format(len(interactive_state["multi_mask"]["masks"])))
         mask_dropdown.append("mask_{:03d}".format(len(interactive_state["multi_mask"]["masks"])))
-        select_frame, run_status = show_mask(video_state, interactive_state, mask_dropdown)
+        select_frame, run_status = show_mask(video_state, interactive_state, mask_dropdown, mode=1)
 
         operation_log = [("",""),("Added a mask, use the mask select for target tracking or inpainting.","Normal")]
     except:
@@ -217,13 +217,13 @@ def remove_multi_mask(interactive_state, mask_dropdown):
     operation_log = [("",""), ("Remove all mask, please add new masks","Normal")]
     return interactive_state, gr.update(choices=[],value=[]), operation_log
 
-def show_mask(video_state, interactive_state, mask_dropdown):
+def show_mask(video_state, interactive_state, mask_dropdown, mode=0):
     mask_dropdown.sort()
     select_frame = video_state["origin_images"][video_state["select_frame_number"]]
     for i in range(len(mask_dropdown)):
         mask_number = int(mask_dropdown[i].split("_")[1]) - 1
         mask = interactive_state["multi_mask"]["masks"][mask_number]
-        select_frame = mask_painter(select_frame, mask.astype('uint8'), mask_color=mask_number+2)
+        select_frame = mask_painter(select_frame, mask.astype('uint8'), mask_color=mask_number+2, mode)
     
     operation_log = [("",""), ("Select {} for tracking or inpainting".format(mask_dropdown),"Normal")]
     return select_frame, operation_log
