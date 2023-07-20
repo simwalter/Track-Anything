@@ -138,21 +138,21 @@ def mask_painter(input_image, input_mask, mask_color=5, mask_alpha=0.7, contour_
 	assert input_image.shape[:2] == input_mask.shape, 'different shape between image and mask'
 	# 0: background, 1: foreground
 	mask = np.clip(input_mask, 0, 1)
-	contour_radius = (contour_width - 1) // 2
+	# contour_radius = (contour_width - 1) // 2
 
-	dist_transform_fore = cv2.distanceTransform(mask, cv2.DIST_L2, 3)
-	dist_transform_back = cv2.distanceTransform(1-mask, cv2.DIST_L2, 3)
-	dist_map = dist_transform_fore - dist_transform_back
+	# dist_transform_fore = cv2.distanceTransform(mask, cv2.DIST_L2, 3)
+	# dist_transform_back = cv2.distanceTransform(1-mask, cv2.DIST_L2, 3)
+	# dist_map = dist_transform_fore - dist_transform_back
 	# ...:::!!!:::...
-	contour_radius += 2
-	contour_mask = np.abs(np.clip(dist_map, -contour_radius, contour_radius))
-	contour_mask = contour_mask / np.max(contour_mask)
-	contour_mask[contour_mask>0.5] = 1.
+	# contour_radius += 2
+	# contour_mask = np.abs(np.clip(dist_map, -contour_radius, contour_radius))
+	# contour_mask = contour_mask / np.max(contour_mask)
+	# contour_mask[contour_mask>0.5] = 1.
 
 	# paint mask
 	painted_image = vis_add_mask(input_image.copy(), mask.copy(), mask_color, mask_alpha)
 	# paint contour
-	painted_image = vis_add_mask(painted_image.copy(), 1-contour_mask, contour_color, 1)
+	# painted_image = vis_add_mask(painted_image.copy(), 1-contour_mask, contour_color, 1)
 
 	return painted_image
 
