@@ -104,9 +104,13 @@ color_list = color_list.astype('uint8').tolist()
 
 
 def vis_add_mask(image, mask, color, alpha):
-	color = np.array(color_list[color])
 	mask = mask > 0.5
-	image[mask] = image[mask] * (1-alpha) + color * alpha
+	if mode:
+		image[:] = color_list[1]
+		image[mask] = color_list[0]
+	else:
+		color = np.array(color_list[color])
+		image[mask] = image[mask] * (1-alpha) + color * alpha
 	return image.astype('uint8')
 
 def point_painter(input_image, input_points, point_color=5, point_alpha=0.9, point_radius=15, contour_color=2, contour_width=5):
@@ -134,7 +138,7 @@ def point_painter(input_image, input_points, point_color=5, point_alpha=0.9, poi
 	painted_image = vis_add_mask(painted_image.copy(), 1-contour_mask, contour_color, 1)
 	return painted_image
 
-def mask_painter(input_image, input_mask, mask_color=5, mask_alpha=0.7, contour_color=1, contour_width=3):
+def mask_painter(input_image, input_mask, mask_color=5, mask_alpha=0.7, contour_color=1, contour_width=3, mode=0):
 	assert input_image.shape[:2] == input_mask.shape, 'different shape between image and mask'
 	# 0: background, 1: foreground
 	mask = np.clip(input_mask, 0, 1)
