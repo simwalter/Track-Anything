@@ -200,6 +200,7 @@ def mask_painter(input_image, input_mask, background_alpha=0.5, background_blur_
 	assert mode in ['00', '01', '10', '11'], 'mode should be 00, 01, 10, or 11'
 
 	# downsample input image and mask
+	print("ok")
 	width, height = input_image.shape[0], input_image.shape[1]
 	res = 1024
 	ratio = min(1.0 * res / max(width, height), 1.0)  
