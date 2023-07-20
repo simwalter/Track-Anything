@@ -111,7 +111,7 @@ def vis_add_mask(image, mask, color, alpha):
 	# pixel_image = cv2.resize(temp, (width, height), interpolation=cv2.INTER_NEAREST)
 	# color = np.array(color_list[color])
 	mask = mask > 0.5
-	image[mask] = pixel_image
+	image[mask] = pixel_image[mask]
 	return image.astype('uint8')
 
 def point_painter(input_image, input_points, point_color=5, point_alpha=0.9, point_radius=15, contour_color=2, contour_width=5):
